@@ -7,7 +7,7 @@ using Bradaz.Utils.Interfaces;
 
 namespace Bradaz.Utils
 {
-    public class CSVReader : ICSV,    
+    public class CSVReader : ICSV,    IDisposable
     {
 
     }
