@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bradaz.Utils", "Bradaz.Utils\Bradaz.Utils.csproj", "{665D373B-AB4E-4451-B1C8-F3547EE443C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSV", "ConsoleApplication1\Test_CSV.csproj", "{7DE36483-76B1-4286-8AB3-F995E0776115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_CSV_WinForms", "Test_CSV_WinForms\Test_CSV_WinForms.csproj", "{C6672397-68F3-482E-B0BC-B89DAA3652A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{665D373B-AB4E-4451-B1C8-F3547EE443C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{665D373B-AB4E-4451-B1C8-F3547EE443C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665D373B-AB4E-4451-B1C8-F3547EE443C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DE36483-76B1-4286-8AB3-F995E0776115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE36483-76B1-4286-8AB3-F995E0776115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE36483-76B1-4286-8AB3-F995E0776115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE36483-76B1-4286-8AB3-F995E0776115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6672397-68F3-482E-B0BC-B89DAA3652A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6672397-68F3-482E-B0BC-B89DAA3652A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6672397-68F3-482E-B0BC-B89DAA3652A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6672397-68F3-482E-B0BC-B89DAA3652A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
