@@ -1,0 +1,12 @@
+account,name,postcode
+111111111,gareth,bn13 2qb
+222222222,casey lou,bn13 3rb
+333333333,bugger,po10
+"444444444",bum,po10
+
+""555555555"",bum,po10
+""666666666"",bum,po10,012345
+""777777777"",bum,po10,012345,
+"888888,888",bum,po10
+"999999,999",bum,po10
+"xxx,9,99",bum,po10
