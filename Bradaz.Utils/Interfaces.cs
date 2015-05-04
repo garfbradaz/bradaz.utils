@@ -8,8 +8,18 @@ namespace Bradaz.Utils.Interfaces
 {
     interface ICSV
     {
-        int NumberOfColumns;
-        int NumberOfRows;
-        char Delimiter;
+        int NumberOfColumns
+        {
+            get;
+        }
+        int NumberOfRows
+        {
+            get;
+
+        }
+        char Delimiter
+        {
+            get;
+        }
     }
 }
