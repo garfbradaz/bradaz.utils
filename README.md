@@ -11,5 +11,5 @@ This now includes
 
 ##Trello Board for ideas:
 
-You can track what I'm doing ot planning on doing [here](https://trello.com/b/JTvVlc84/csvreader).
+You can track what I'm doing or planning on doing [here](https://trello.com/b/JTvVlc84/csvreader).
 
