@@ -43,6 +43,7 @@ namespace Test_CSV_WinForms
                             foreach (CSVColumn column in row.Columns)
                             {
                                 ///Set the columns out.
+                                ///Todo: Presumption made Row 1 is the/a header record - we need to change that to check somehow.
                                 if (column.RowNumber == 1)
                                 {
                                     dataGridView1.Columns[column.ColumnNumber - 1].Name = column.ColumnValue;

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="XMLCSVColumn"
+    targetNamespace="http://tempuri.org/XMLCSVColumn.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XMLCSVColumn.xsd"
+    xmlns:mstns="http://tempuri.org/XMLCSVColumn.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+<!--Simple Elements-->
+  <xs:element name="numberOfColumns" type="xs:positiveInteger"/>
+  <xs:element name="headerRecordIncluded" type="xs:boolean"/>
+  <xs:element name="headerName" type="xs:string"/>
+  <xs:element name="columnNumber" type="xs:positiveInteger"/>
+  <xs:element name="valueType" type="xs:string"/>
+ 
+  
+
+  <!--definition of CSV Settings themselves-->
+  <xs:element name="CSVSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="numberOfColumns" maxOccurs="1" />
+        <xs:element ref="headerRecordIncluded" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!--Column - example that will be dynamic-->
+  <xs:element name="CSVColumn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="columnNumber" minOccurs="1"/>
+        <xs:element ref="valueType" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!--Actually how the file will be composed-->
+  <xs:element name="CSVSettingsFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="CSVSettings"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="CSVColumn" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>  
+</xs:schema>

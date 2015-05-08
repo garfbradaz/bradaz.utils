@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CSVSettingsFile xmlns="http://tempuri.org/XMLCSVColumn.xsd">
+       <header>
+         <CSVSettings>
+             <numberOfColumns>3</numberOfColumns>
+             <headerRecordIncluded>false</headerRecordIncluded>
+         </CSVSettings>
+       </header>
+        <CSVColumn>
+                <columnNumber>1</columnNumber>
+                <valueType>String</valueType>
+        </CSVColumn>
+        <CSVColumn>
+                <columnNumber>2</columnNumber>
+                <valueType>String</valueType>
+        </CSVColumn>
+        <CSVColumn>
+                <columnNumber>3</columnNumber>
+                <valueType>String</valueType>
+        </CSVColumn>
+</CSVSettingsFile>
+
+
+
