@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,13 +48,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Flags.cs" />
-    <Compile Include="Interfaces.cs" />
+    <Compile Include="Interfaces\Interfaces.cs" />
     <Compile Include="IO.cs" />
+    <Compile Include="Models.cs" />
+    <Compile Include="Models\GithubTile.cs" />
+    <Compile Include="Models\GithubTileDTO.cs" />
+    <Compile Include="Interfaces\ITile.cs" />
+    <Compile Include="Interfaces\ITileDTO.cs" />
+    <Compile Include="Models\Tile.cs" />
+    <Compile Include="Models\TileContext.cs" />
+    <Compile Include="Models\TileDTO.cs" />
+    <Compile Include="Models\TrelloTile.cs" />
+    <Compile Include="Models\TrelloTileDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings.cs" />
     <Compile Include="XML.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="XML Schemas\XMLCSVColumn.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -55,6 +75,9 @@
     <Content Include="XML Schemas\XMCSVFileSettings.xml">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
