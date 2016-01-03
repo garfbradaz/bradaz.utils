@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{665D373B-AB4E-4451-B1C8-F3547EE443C2}</ProjectGuid>
+    <ProjectGuid>{C8A77864-D410-407D-BC29-08C76823589D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Bradaz.Utils</RootNamespace>
-    <AssemblyName>Bradaz.Utils</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>Bradaz.Utils.Legacy</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,21 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-=======
     <Reference Include="System" />
     <Reference Include="System.Core" />
->>>>>>> refs/remotes/origin/csvreader
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,44 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flags.cs" />
-<<<<<<< HEAD
-    <Compile Include="Interfaces\Interfaces.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="Models.cs" />
-    <Compile Include="Models\GithubTile.cs" />
-    <Compile Include="Models\GithubTileDTO.cs" />
-    <Compile Include="Interfaces\ITile.cs" />
-    <Compile Include="Interfaces\ITileDTO.cs" />
-    <Compile Include="Models\Tile.cs" />
-    <Compile Include="Models\TileContext.cs" />
-    <Compile Include="Models\TileDTO.cs" />
-    <Compile Include="Models\TrelloTile.cs" />
-    <Compile Include="Models\TrelloTileDTO.cs" />
+    <Compile Include="Flags_v4.0.cs" />
+    <Compile Include="Interfaces_v4.0.cs" />
+    <Compile Include="IO_v4.0.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings.cs" />
-    <Compile Include="XML.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="XML Schemas\XMLCSVColumn.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="XML Schemas\XMCSVFileSettings.xml">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-=======
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings.cs" />
->>>>>>> refs/remotes/origin/csvreader
+    <Compile Include="Strings_v4.0.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

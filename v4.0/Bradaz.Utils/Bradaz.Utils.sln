@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bradaz.Utils", "Bradaz.Utils\Bradaz.Utils.csproj", "{C8A77864-D410-407D-BC29-08C76823589D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_app_v4", "test_app_v4\test_app_v4.csproj", "{256F77A4-255E-4742-9FFB-1D6FF08E3312}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8A77864-D410-407D-BC29-08C76823589D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A77864-D410-407D-BC29-08C76823589D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A77864-D410-407D-BC29-08C76823589D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A77864-D410-407D-BC29-08C76823589D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256F77A4-255E-4742-9FFB-1D6FF08E3312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256F77A4-255E-4742-9FFB-1D6FF08E3312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256F77A4-255E-4742-9FFB-1D6FF08E3312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256F77A4-255E-4742-9FFB-1D6FF08E3312}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

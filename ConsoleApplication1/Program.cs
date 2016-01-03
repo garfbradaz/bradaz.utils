@@ -14,7 +14,11 @@ namespace Test_CSV
         {
             try
             {
+<<<<<<< HEAD
                 string myFile = @"C:\Users\Gareth\SkyDrive\CODE\Bradaz.Utils\ConsoleApplication1\testfile.txt";
+=======
+                string myFile = @"C:\Users\Gareth.Bradley.HACHETTE\OneDrive\CODE\Github\bradaz.utils\ConsoleApplication1\testfile.txt";
+>>>>>>> refs/remotes/origin/csvreader
                 CSVFile file = new CSVFile(myFile);
          
                 using (file.CSVStream = new CSVReader(file.FileNameAndPath))
