@@ -10,6 +10,7 @@ using Bradaz.Utils.Strings;
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Dynamic;
 
 
 ///Class will encapsulate IO functions.
@@ -178,7 +179,14 @@ namespace Bradaz.Utils.IO
         {
             get { return rows; }
         }
- 
+
+        #region Column Settings
+
+        private Dictionary<int, CSVColumnDescriptor> ColumnSettings = new Dictionary<int, CSVColumnDescriptor>();
+        public Dictionary<int, dynamic> dynamicFile = new Dictionary<int, dynamic>();
+        
+        #endregion
+
         public string FileNameAndPath { get; set; }
 
         bool disposed = false;
@@ -234,6 +242,7 @@ namespace Bradaz.Utils.IO
 
         }
 
+        #region Methods
         /// <summary>
         /// Read the line into a buffer area and create a row
         /// </summary>insta
@@ -335,7 +344,7 @@ namespace Bradaz.Utils.IO
                 if(row[positionInRow] == Delimiter)
                 {
            
-                    //Comma must not be the last character. 
+                    //Delimiter must not be the last character. 
                     if (positionInRow == (row.Length - 1))
                     {
                         _row.Errors.Add(RowError.LastFieldFollowedByComma);
@@ -374,6 +383,11 @@ namespace Bradaz.Utils.IO
                 _row.Errors.Add(RowError.MoreColumnsThanPreviousRows);
             }
 
+            //Create a Dynamic Object if there is a settings file to parse.
+            if(ColumnSettings.Count > 0 &&  _row.State == State.Validated)
+            {
+                CreateDynamicCSV(_row);
+            }
 
             return _row;
         }
@@ -408,6 +422,234 @@ namespace Bradaz.Utils.IO
 
         }
 
+        /// <summary>
+        /// Method to allow you to set settings for Columns.
+        /// </summary>
+        /// <param name="setting">setting</param>
+        public void AddSetting(CSVColumnDescriptor setting)
+        {
+            if(setting == null)
+            {
+                throw new ArgumentNullException("The setting parameter is empty! you cannot add an empty setting" 
+               + " it will blow things up! ");
+            }
 
+            
+            CSVColumnDescriptor test;
+            if(ColumnSettings.TryGetValue(setting.ColumnNumber,out test))
+            {
+                throw new ArgumentException("A setting with Column Number " + setting.ColumnNumber.ToString() + " already exists. Found: \n"
+                    + "ColumnName- " + test.ColumnName + " ColumnNumber- " + test.ColumnNumber + " ColumnType-" + test.ColumnType.ToString());
+            }
+
+            try
+            {
+                ColumnSettings.Add(setting.ColumnNumber, setting);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Key is null for settings " + setting.ColumnNumber);
+            }
+
+        }
+
+        /// <summary>
+        /// Method to allow you to set a collection of settings for Columns.
+        /// </summary>
+        /// <param name="settings">settings.</param>
+        public void AddSettings(IEnumerable<CSVColumnDescriptor> settings)
+        {
+            foreach (CSVColumnDescriptor setting in settings)
+            {
+                AddSetting(setting);
+            }
+        }
+
+        /// <summary>
+        /// Method to create the dynamic collection based off <see cref="CSVRow.cs"/>  data.
+        /// and settings passed in by <seealso cref="CSVColumnDescriptor.cs"/>
+        /// </summary>
+        /// <param name="row"></param>
+        protected void CreateDynamicCSV(CSVRow row)
+        {
+
+            Dictionary<string, object> propertyNamesAndValues = new Dictionary<string, object>();
+            foreach (CSVColumn column in row.Columns)
+            {
+                //Locate PropertyName from CSVSettings.
+                CSVColumnDescriptor setting;
+                int lookup = 0;
+                if(column.ColumnNumber > 0)
+                {
+                    lookup = column.ColumnNumber - 1;
+                }
+                if (!ColumnSettings.TryGetValue(lookup, out setting))
+                {
+                    throw new ArgumentException("Cannot find Column Number " + column.ColumnNumber + " for row " + row.RowNumber );
+                }                                                                                                                                   
+                
+                object test;
+                if(propertyNamesAndValues.TryGetValue(setting.ColumnName,out test))   
+                {
+                    throw new ArgumentException("Property Name already exists " + setting.ColumnName);
+                }
+
+                //Add the property Name and value to the Dictionary.
+                propertyNamesAndValues.Add(setting.ColumnName, column.ColumnValue);                    
+            }
+
+            dynamic dyn = new CSVDynamic(propertyNamesAndValues);
+            dynamicFile.Add(row.RowNumber,dyn);
+        }  
+
+        /// <summary>
+        /// Method to allow you to query the CSVFile and return a dynamic POCO
+        /// representation of the row.
+        /// </summary>
+        /// <param name="rowNumber">rowNumber to find.</param>
+        /// <returns></returns>
+        public dynamic GetDynamicCSVObject(int rowNumber)
+        {
+            dynamic d;
+            return (dynamicFile.TryGetValue(rowNumber, out d)) ? d : null;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Class that represents settings of a column.
+    /// Things like the data type of the column.
+    /// </summary>
+    public class CSVColumnDescriptor
+    {
+        #region Properties and fields
+        private int columnNumber;
+
+        public int ColumnNumber
+        {
+            get { return columnNumber; }
+            set { columnNumber = value; }
+        }
+
+        private Type columnType;
+
+        public Type ColumnType
+        {
+            get { return columnType; }
+            set { columnType = (value != null) ? value : typeof(System.String);}
+        }
+
+        private bool columnHasHeader;
+
+        public bool ColumnHasHeader
+        {
+            get { return columnHasHeader; }
+            set { columnHasHeader = value; }
+        }
+
+        private string columnHeader;
+
+        public string ColumnHeader
+        {
+            get { return columnHeader; }
+            set 
+            { 
+                columnHeader = (!string.IsNullOrWhiteSpace(value)) ? value : string.Empty;
+                columnHasHeader = (!string.IsNullOrWhiteSpace(value)) ? true : false;
+            }
+        }
+
+        private bool columnCanBeEmpty;
+
+        public bool ColumnCanBeEmpty
+        {
+            get { return columnCanBeEmpty; }
+            set { columnCanBeEmpty = value; }
+        }
+
+        private string columnName;
+
+        public string ColumnName
+        {
+            get { return columnName; }
+            set { columnName = (!string.IsNullOrWhiteSpace(value)) ? value : string.Empty; }
+        }
+
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="columnNumber">Column Number in file (Zero based indexing)</param>
+        /// <param name="columnType">CLR Type (like String etc)</param>
+        /// <param name="columnPropertyName">Name of the property you will reference in your object</param>
+        public CSVColumnDescriptor(int columnNumber, Type columnType, string columnPropertyName)
+        {
+            Init(columnNumber, columnType, false, null, true, columnPropertyName);
+        }
+        #endregion
+
+        #region Methods
+        private void Init(int columnNumber = 0, Type columnType = null, bool columnHasHeader = false,
+            string columnHeader = null, bool columnCanBeEmpty = true, string columnName = null)
+        {
+            this.ColumnNumber = columnNumber; 
+            this.ColumnType = columnType;
+            this.ColumnHasHeader = columnHasHeader;
+            this.ColumnHeader = columnHeader;
+            this.ColumnCanBeEmpty = columnCanBeEmpty;
+            this.ColumnName = columnName;
+           
+        }
+        #endregion
+
+    }
+
+    /// <summary>
+    /// Dynamic CSV Object. 
+    /// <remarks>Each CSVDynamic represents a row with <see cref="CSVFile.cs"/> and each property of
+    /// CSVDynamic represents a <see cref="CSVColumn.cs"/> with the row.</remarks>
+    /// </summary>
+    public sealed class CSVDynamic : DynamicObject
+    {
+        private readonly Dictionary<string, object> properties;
+        public CSVDynamic (Dictionary<string,object> properties)
+        {
+            this.properties = properties;
+        }
+
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
+            return properties.Keys;
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (properties.ContainsKey(binder.Name))
+            {
+                result = properties[binder.Name];
+                return true;
+            }
+            else
+            {
+                result = null;
+                return false;
+            }
+        }
+
+        public override bool TrySetMember(SetMemberBinder binder, object value)
+        {
+            if (properties.ContainsKey(binder.Name))
+            {
+                properties[binder.Name] = value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
