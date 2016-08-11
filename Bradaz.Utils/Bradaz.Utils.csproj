@@ -30,7 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -41,10 +40,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-=======
+
     <Reference Include="System" />
     <Reference Include="System.Core" />
->>>>>>> refs/remotes/origin/csvreader
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Flags.cs" />
-<<<<<<< HEAD
     <Compile Include="Interfaces\Interfaces.cs" />
     <Compile Include="IO.cs" />
     <Compile Include="Models.cs" />
@@ -84,12 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-=======
     <Compile Include="Interfaces.cs" />
     <Compile Include="IO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings.cs" />
->>>>>>> refs/remotes/origin/csvreader
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
