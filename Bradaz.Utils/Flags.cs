@@ -10,7 +10,6 @@ namespace Bradaz.Utils
     /// <summary>
     /// State of a record.
     /// </summary>
-<<<<<<< HEAD
     [Flags]
     public enum State
     {
@@ -50,32 +49,4 @@ namespace Bradaz.Utils
 
     }
 
-=======
-        [Flags]
-        public enum State
-        {
-            Validated = 0,
-            Failed = 1,
-            LogicallyDeleted = 2
-
-        }
-
-        /// <summary>
-        /// These Row Errors will be found during Parsing the row.
-        /// They are based off the rules of the RFC4180.
-        /// </summary>
-        /// 
-        [Flags]
-        public enum RowError
-        {
-            RFC4180Passed = 0,
-            MoreColumnsThanPreviousRows = 1,
-            LastFieldFollowedByComma = 2,
-            ImbeddedDelimiterIssue = 3,
-            ImeddedDoubleQuoteIssue = 4,
-            EmptyRow = 5
-
-
-        }
->>>>>>> refs/remotes/origin/csvreader
 }

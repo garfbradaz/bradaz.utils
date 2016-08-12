@@ -15,8 +15,8 @@ namespace Test_CSV
             try
             {
 
-                string myFile = @"C:\Users\Gareth\SkyDrive\CODE\Bradaz.Utils\ConsoleApplication1\testfile.txt";
-                //string myFile = @"C:\Users\Gareth.Bradley.HACHETTE\OneDrive\CODE\Github\bradaz.utils\ConsoleApplication1\testfile.txt";
+                //string myFile = @"C:\Users\Gareth\SkyDrive\CODE\Bradaz.Utils\ConsoleApplication1\testfile.txt";
+                string myFile = @"C:\Git\MyGitHub\bradaz.utils\v4.0\Bradaz.Utils\test_app_v4\testfile.txt";
                 CSVFile file = new CSVFile(myFile);
          
                 using (file.CSVStream = new CSVReader(file.FileNameAndPath))
