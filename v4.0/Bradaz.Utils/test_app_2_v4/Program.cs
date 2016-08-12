@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bradaz.Utils.IO;
 using Bradaz.Utils;
 
-namespace Test_CSV
+namespace test_app_2_v4
 {
     class Program
     {
@@ -15,17 +15,17 @@ namespace Test_CSV
             try
             {
 
-                string myFile = @"C:\Users\Gareth\SkyDrive\CODE\Bradaz.Utils\ConsoleApplication1\testfile.txt";
-                //string myFile = @"C:\Users\Gareth.Bradley.HACHETTE\OneDrive\CODE\Github\bradaz.utils\ConsoleApplication1\testfile.txt";
-                CSVFile file = new CSVFile(myFile);
-         
+                //string myFile = @"C:\Users\Gareth\SkyDrive\CODE\Bradaz.Utils\ConsoleApplication1\testfile.txt";
+                string myFile = @"C:\Git\MyGitHub\bradaz.utils\v4.0\Bradaz.Utils\test_app_2_v4\testfile.txt";
+                CSVFile file = new CSVFile(myFile,',',1);
+
                 using (file.CSVStream = new CSVReader(file.FileNameAndPath))
                 {
-                    file.ReadLines();
+                    file.ReadLines(false,true);
 
                     //sort so we get the Validated first.
-   
-                    foreach(CSVRow row in file.Rows)
+
+                    foreach (CSVRow row in file.Rows)
                     {
                         Console.WriteLine("==========");
                         Console.WriteLine("Row No: " + row.RowNumber + " has " + row.NumberOfColumns + " columns. The data is " + row.OriginalData);
@@ -40,14 +40,14 @@ namespace Test_CSV
 
                         if (row.NumberOfColumns > 0)
                         {
-                            foreach(CSVColumn column in row.Columns)
+                            foreach (CSVColumn column in row.Columns)
                             {
                                 Console.WriteLine("Column No: " + column.ColumnNumber + " for row " + column.RowNumber + " " + column.ColumnValue);
                             }
                         }
- 
+
                     }
-                    
+
                 }
             }
             catch (Exception e)

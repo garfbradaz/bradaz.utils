@@ -169,6 +169,7 @@ namespace Bradaz.Utils.IO
     public class CSVFile : ICSV, IDisposable
     {
         protected string lineBuffer;
+        protected int headerRow;
         internal List<CSVRow> rows = new List<CSVRow>();
         public CSVReader CSVStream { get; set; }
         public int NumberOfColumns { get; private set;}
@@ -218,6 +219,24 @@ namespace Bradaz.Utils.IO
             CSVReader CSVStream = new CSVReader(fileNameAndPath);
         }
 
+
+        /// <summary>
+        ///  Initilizes a CSV file. You can specify a delimiter and the row number which contains the
+        ///  Header.
+        /// </summary>
+        /// <param name="fileNameAndPath"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="headerRow"></param>
+        public CSVFile(string fileNameAndPath, char delimiter, int headerRow )
+        {
+            if (!File.Exists(fileNameAndPath))
+                throw new FileNotFoundException("File Not Found fileName " + fileNameAndPath);
+            Delimiter = delimiter;
+            FileNameAndPath = fileNameAndPath;
+            this.headerRow = headerRow;
+            CSVReader CSVStream = new CSVReader(fileNameAndPath);
+        }
+
         /// <summary>
         /// Initlizes a CSV file using an exising Stream.
         /// </summary>
@@ -242,6 +261,21 @@ namespace Bradaz.Utils.IO
 
         }
 
+        /// <summary>
+        /// Initlizes a CSV file using an exising Stream and passes a delimiter and the row number which contains the
+        /// Header.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="delimiter"></param>
+        public CSVFile(Stream stream, char delimiter, int headerRow)
+        {
+
+            CSVReader CSVStream = new CSVReader(stream);
+            Delimiter = delimiter;
+            this.headerRow = headerRow;
+
+        }
+
         #region Methods
         /// <summary>
         /// Read the line into a buffer area and create a row
@@ -255,21 +289,42 @@ namespace Bradaz.Utils.IO
         /// Read the line into a buffer area and print out the line count
         /// </summary>
         /// <param name="printNumberOfRows"></param>
-        public void ReadLines(bool printNumberOfRows)
+        public void ReadLines(bool printNumberOfRows, bool ignoreHeaderRow = false)
         {
-            
+            bool addToMemory = true;
+
             try
             {
                 while ((lineBuffer = CSVStream.ReadLine()) != null)
                 {
                     NumberOfRows++;
-                    var r = ParseRow(lineBuffer,NumberOfRows);
+                    var r = ParseRow(lineBuffer, NumberOfRows);
                     if (NumberOfColumns == 0)
                     {
                         NumberOfColumns = r.NumberOfColumns;
                     }
                     r.OriginalData.Insert(0, lineBuffer);
-                    rows.Add(r);
+                    
+                    /*  Now we can control if we need the Header record in memory at all.
+                        Use case: Some calling applications may not want to add any Header Record validation and just say:
+                        'Hey we always know the header record is X row....ignore it'       */
+
+                    if(ignoreHeaderRow)
+                    {
+                        if(headerRow == NumberOfRows)
+                        {
+                            addToMemory = false;
+                        }
+                        else
+                        {
+                            addToMemory = true;
+                        }
+                    }
+                    
+                    if (addToMemory)
+                    {
+                        rows.Add(r);
+                    }
                                   
                 }
             }
@@ -448,7 +503,7 @@ namespace Bradaz.Utils.IO
             }
             catch (ArgumentNullException ex)
             {
-                Console.WriteLine("Key is null for settings " + setting.ColumnNumber);
+                Console.WriteLine("Key is null for settings " + setting.ColumnNumber + " " + ex.Data);
             }
 
         }
