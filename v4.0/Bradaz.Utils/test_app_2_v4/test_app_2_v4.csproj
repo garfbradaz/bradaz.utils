@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{665D373B-AB4E-4451-B1C8-F3547EE443C2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{35279184-CF14-40B3-B01B-5C17BB530F16}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bradaz.Utils</RootNamespace>
-    <AssemblyName>Bradaz.Utils</AssemblyName>
+    <RootNamespace>test_app_2_v4</RootNamespace>
+    <AssemblyName>test_app_2_v4</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,16 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,34 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flags.cs" />
-    <Compile Include="Interfaces\Interfaces.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="Models.cs" />
-    <Compile Include="Models\GithubTile.cs" />
-    <Compile Include="Models\GithubTileDTO.cs" />
-    <Compile Include="Interfaces\ITile.cs" />
-    <Compile Include="Interfaces\ITileDTO.cs" />
-    <Compile Include="Models\Tile.cs" />
-    <Compile Include="Models\TileContext.cs" />
-    <Compile Include="Models\TileDTO.cs" />
-    <Compile Include="Models\TrelloTile.cs" />
-    <Compile Include="Models\TrelloTileDTO.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings.cs" />
-    <Compile Include="XML.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="XML Schemas\XMLCSVColumn.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="XML Schemas\XMCSVFileSettings.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <ProjectReference Include="..\Bradaz.Utils\Bradaz.Utils.csproj">
+      <Project>{c8a77864-d410-407d-bc29-08c76823589d}</Project>
+      <Name>Bradaz.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
